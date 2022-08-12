@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Courgette&text=Jane%20Doe");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
 
 html, body {
 	height: 100%;
 	width: 100%;
-	padding: 0 1vw;
+	padding: 0;
 	margin: 0;
 	background: #FAFAFA;
-	font-family: 'Helvetica Neue', arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	color: #444;
 	-webkit-font-smoothing: antialiased;
@@ -19,6 +20,7 @@ html, body {
 
 #app {
 	height: 100%;
+	max-width: 1440px;
 }
 
 

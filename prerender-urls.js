@@ -8,6 +8,7 @@ module.exports = () => {
 	const pages = [
 		{
 			url: '/',
+			data: blogs,
 			seo: {
 				cover: '/assets/profile.jpg'
 			}
