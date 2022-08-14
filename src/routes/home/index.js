@@ -35,7 +35,7 @@ function getBlogsListing(data, isLoading) {
 		return (
       <>'     '<div
       	class={styles.featured}
-      	style={`background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('${feature.details.cover}') no-repeat center fixed;`}
+      	style={`background: url('${feature.details.cover}') no-repeat center fixed;`}
       >
         	<div class={styles.featured_image}>
         		<div class={styles.featured_blog}>

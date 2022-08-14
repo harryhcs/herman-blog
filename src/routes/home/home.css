@@ -65,6 +65,8 @@ h2 {
 
   .featured_blog {
     padding: 20px;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   }
 }
 
@@ -89,5 +91,6 @@ h2 {
   .featured_blog {
     padding: 50px;
     width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   }
 }
