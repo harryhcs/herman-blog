@@ -16,9 +16,13 @@ const blogs = (props) => {
 };
 
 function CodeBlock(props) {
-	const fallback = <pre><code>{props.children}</code></pre>;
+	const fallback = (
+		<pre>
+			<code>{props.children}</code>
+		</pre>
+	);
 	if (typeof window === 'undefined') {
-		return (fallback);
+		return fallback;
 	}
 	return (
 		<Suspense fallback={fallback}>
@@ -40,7 +44,7 @@ function getBlogBody(data, isLoading) {
 	if (isLoading) {
 		return (
 			<div class={style.loadingPlaceholder}>
-				<h1 class={`${style.blogtitle} loading`} >&nbsp;</h1>
+				<h1 class={`${style.blogtitle} loading`}>&nbsp;</h1>
 				<caption class={`${style.blogsubtitle} loading`}>&nbsp;</caption>
 				<div class={style.blogbody}>
 					<div class={`${style.loadingBody} loading`} />
@@ -54,22 +58,32 @@ function getBlogBody(data, isLoading) {
 	if (data && data.data) {
 		const { details, content } = data.data;
 		return (
-			<div>
+			<div class={style.blog}>
 				<h1 class={style.blogtitle}>{details.title}</h1>
-				{ details.subtitle && <caption class={style.blogsubtitle}>{details.subtitle}</caption> }
-				{ details.cover && <div class={style.blogcover} style={`background-image:url(${details.cover})`} /> }
+				{details.subtitle && (
+					<caption class={style.blogsubtitle}>{details.subtitle}</caption>
+				)}
+				{details.cover && (
+					<div
+						class={style.blogcover}
+						style={`background-image:url(${details.cover})`}
+					/>
+				)}
 				<div class={style.blogbody}>
-					<Markdown options={{
-						overrides: {
-							img: {
-								component: InlineImage
-							},
-							code: {
-								component: CodeBlock
+					<Markdown
+						options={{
+							overrides: {
+								img: {
+									component: InlineImage
+								},
+								code: {
+									component: CodeBlock
+								}
 							}
-						}
-					}}
-					>{ content }</Markdown>
+						}}
+					>
+						{content}
+					</Markdown>
 				</div>
 			</div>
 		);

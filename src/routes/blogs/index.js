@@ -1,15 +1,15 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { h } from 'preact';
 import { Link } from 'preact-router';
 import { usePrerenderData } from '@preact/prerender-data-provider';
 import style from './style';
 
 const blogs = (props) => {
-	console.log(props)
 	const [data, isLoading] = usePrerenderData(props);
 	return (
 		<div class={style.pageBlogs}>
-			<h1 class={style.pageTitle}>My Blogs</h1>
-			{ getBlogsListing(data, isLoading) }
+			<h1 class={style.pageTitle}>Recent</h1>
+			{getBlogsListing(data, isLoading)}
 		</div>
 	);
 };
@@ -28,23 +28,23 @@ function getBlogsListing(data, isLoading) {
 	if (data && data.data) {
 		const { data: blogs } = data;
 		return (
-			<>
-				{blogs.edges.map(blog => (
-				<Link href={`/blog/${blog.id}`}>
-					<article>
-						<h2>{blog.details.title}</h2>
-						<div>
-							{
-								(blog.details.tags.substr(1, blog.details.tags.length - 2).split(',') || []).map(tag => <span class={style.tag}>{tag}</span>)
-							}
-						</div>
-						<p class={style.preview}>
-							{blog.preview}
-						</p>
-					</article>
-				</Link>
-			))}
-			</>
+      <>'       '{blogs.edges.map((blog) => (
+        	<Link href={`/blog/${blog.id}`}>
+        		<article>
+        			<h2>{blog.details.title}</h2>
+        			<div>
+        				{(
+        					blog.details.tags
+        						.substr(1, blog.details.tags.length - 2)
+        						.split(',') || []
+        				).map((tag) => (
+        					<span class={style.tag}>{tag}</span>
+        				))}
+        			</div>
+        			<p class={style.preview}>{blog.preview}</p>
+        		</article>
+        	</Link>
+      ))}'     '</>
 		);
 	}
 }

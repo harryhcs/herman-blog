@@ -28,18 +28,22 @@ function getDetails(format, data) {
 
 function getPreview(data) {
 	const { content } = parseMD(data);
-	let preview = content.replace(/---(.*(\r)?\n)*---/, '').replace(/\[.*\]\(.*\)/g, '').replace(/(\r)?\n/,'');
-	preview = preview.substr(0, (preview.indexOf('\n') -1));
-	return preview.length < 500? preview : preview.substr(0, 500);
+	let preview = content
+		.replace(/---(.*(\r)?\n)*---/, '')
+		.replace(/\[.*\]\(.*\)/g, '')
+		.replace(/(\r)?\n/, '');
+	preview = preview.substr(0, preview.indexOf('\n') - 1);
+	return preview.length < 500 ? preview : preview.substr(0, 500);
 }
 
 function getFolders(source) {
-	const isDirectory = source => fs.lstatSync(source).isDirectory();
-	const isAValidFile = source => !fs.lstatSync(source).isDirectory() && source.endsWith('.md');
-	const getAllListings = source =>
-		fs.readdirSync(source).map(name => join(source, name));
+	const isDirectory = (source) => fs.lstatSync(source).isDirectory();
+	const isAValidFile = (source) =>
+		!fs.lstatSync(source).isDirectory() && source.endsWith('.md');
+	const getAllListings = (source) =>
+		fs.readdirSync(source).map((name) => join(source, name));
 	let allContent = getAllListings(source);
-	const edges = allContent.filter(isAValidFile).map(file => {
+	const edges = allContent.filter(isAValidFile).map((file) => {
 		const data = fs.readFileSync(file, 'utf-8');
 		const id = file.substr(file.lastIndexOf(sep) + 1);
 		const format = getExtensionFromFilename(id);
@@ -51,7 +55,7 @@ function getFolders(source) {
 			preview: getPreview(data)
 		};
 	});
-	const nodes = allContent.filter(isDirectory).map(dir => getFolders(dir));
+	const nodes = allContent.filter(isDirectory).map((dir) => getFolders(dir));
 	const result = {
 		id: source.substr(source.lastIndexOf(sep) + 1)
 	};
